@@ -1,0 +1,31 @@
+﻿@model IEnumerable<PatientViewModel>
+
+<h3>Пациенты</h3>
+<br />
+<table class="table table-bordered">
+	<thead class="thead-dark">
+		<tr>
+			<th>ФИО</th>
+			<th>Дата рождения</th>
+			<th>Адрес</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var patient in Model)
+		{
+			<tr>
+				<td>
+					<a href="@Url.Action("PatientTreatments", "Patients", new { patientId = patient.PatientId })">
+						@patient.PatientSurname @patient.PatientName @patient.PatientSecondName
+					</a>
+				</td>
+				<td>@patient.Birthday.Value.ToShortDateString()</td>
+				<td>@patient.Address</td>
+			</tr>
+		}
+	</tbody>
+</table>
+<br />
+<button class="btn btn-primary" onclick="window.location.href='@Url.Action("AddPatient", "Patients")'">
+	Добавить пациента
+</button>

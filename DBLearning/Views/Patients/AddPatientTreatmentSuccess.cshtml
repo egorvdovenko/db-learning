@@ -1,0 +1,7 @@
+﻿@model PatientViewModel
+
+<h3>Процедура успешно добавлена!</h3>
+<br />
+<button class="btn btn-primary" onclick="window.location.href='@Url.Action("PatientTreatments", "Patients", new { patientId = @Model.PatientId })'">
+	Список процедур пациента
+</button>

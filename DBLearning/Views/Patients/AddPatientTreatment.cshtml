@@ -1,0 +1,56 @@
+﻿@model AddPatientTreatmentViewModel
+
+<h3>Новая процедура</h3>
+<br />
+<form method="post" action="/Patients/AddPatientTreatment">
+	<input type="text" hidden name="PatientId" value="@Model.Patient.PatientId">
+	<div class="form-group">
+		<label>ФИО:</label>
+		<input type="text" class="form-control" value="@Model.Patient.PatientSurname.Trim() @Model.Patient.PatientName.Trim() @Model.Patient.PatientSecondName.Trim()" disabled>
+	</div>
+	<div class="form-group">
+		<label>Дата рождения:</label>
+		<input type="date" class="form-control" value="@Model.Patient.Birthday" disabled>
+	</div>
+	<div class="form-group">
+		<label>Вид процедуры:</label>
+		<select class="custom-select" name="TreatmentTypeId">
+			@foreach (var treatmentType in Model.TreatmentTypes)
+			{
+				<option value="@treatmentType.TreatmentTypeId">@treatmentType.TreatmentTypeName</option>
+			}
+		</select>
+	</div>
+	<div class="form-group">
+		<label>Доктор:</label>
+		<select class="custom-select" name="DoctorId">
+			@foreach (var doctor in Model.Doctors)
+			{
+				<option value="@doctor.DoctorId">@doctor.DoctorName</option>
+			}
+		</select>
+	</div>
+	<div class="form-group">
+		<label>Дата начала курса:</label>
+		<input type="date" class="form-control" name="DateBegin">
+	</div>
+	<div class="form-group">
+		<label>Дата окончания курса:</label>
+		<input type="date" class="form-control" name="DateEnd">
+	</div>
+	<div class="form-group">
+		<label>Количество процедур:</label>
+		<input type="number" class="form-control" name="TreatmentSetCount">
+	</div>
+	<div class="form-group">
+		<label>Кабинет:</label>
+		<select class="custom-select" name="DoctorId">
+			@foreach (var number in new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 })
+			{
+				<option value="@number">@number</option>
+			}
+		</select>
+	</div>
+	<br />
+	<button type="submit" class="btn btn-primary">Добавить</button>
+</form>

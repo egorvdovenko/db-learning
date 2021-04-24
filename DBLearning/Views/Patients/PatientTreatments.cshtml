@@ -1,0 +1,48 @@
+﻿@model PatientTreatmentsViewModel
+
+<h3>Список процедур пациента</h3>
+<br />
+<dl class="row">
+	<dt class="col-sm-2">ФИО:</dt>
+	<dd class="col-sm-9">
+		@Model.Patient.PatientSurname @Model.Patient.PatientName @Model.Patient.PatientSecondName
+	</dd>
+	<dt class="col-sm-2">Дата рождения:</dt>
+	<dd class="col-sm-9">
+		@Model.Patient.Birthday.Value.ToShortDateString()
+	</dd>
+	<dt class="col-sm-2">Адрес:</dt>
+	<dd class="col-sm-9">
+		@Model.Patient.Address
+	</dd>
+</dl>
+<br />
+<table class="table table-bordered">
+	<thead class="thead-dark">
+		<tr>
+			<th>Вид процедур</th>
+			<th>Дата начала курса</th>
+			<th>Дата окончания курса</th>
+			<th>Количество назначенных процедур</th>
+			<th>Количество проведенных процедур</th>
+			<th>ФИО доктора</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var treatmentSet in Model.TreatmentSets)
+		{
+			<tr>
+				<td>@treatmentSet.TreatmentType.TreatmentTypeName</td>
+				<td>@treatmentSet.DateBegin.Value.ToShortDateString()</td>
+				<td>@treatmentSet.DateEnd.Value.ToShortDateString()</td>
+				<td>@treatmentSet.TreatmentSetCount</td>
+				<td>@treatmentSet.TreatmentSetCountFact</td>
+				<td>@treatmentSet.Doctor.DoctorName</td>
+			</tr>
+		}
+	</tbody>
+</table>
+<br />
+<button class="btn btn-primary" onclick="window.location.href='@Url.Action("AddPatientTreatment", "Patients", new { patientId = Model.Patient.PatientId })'">
+	Добавить процедуру
+</button>
