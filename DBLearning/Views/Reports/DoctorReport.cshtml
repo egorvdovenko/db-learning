@@ -1,0 +1,39 @@
+﻿@model DoctorViewModel
+
+<h3>Отчёт «Доктор»</h3>
+<br />
+<dl class="row">
+	<dt class="col-sm-3">ФИО:</dt>
+	<dd class="col-sm-9">
+		@Model.DoctorName
+	</dd>
+	<dt class="col-sm-3">Специальность:</dt>
+	<dd class="col-sm-9">
+		@Model.Specialist
+	</dd>
+	<dt class="col-sm-3">Дата приема на работу:</dt>
+	<dd class="col-sm-9">
+		@Model.DoctorWork.Value.ToShortDateString()
+	</dd>
+</dl>
+<table class="table table-bordered">
+	<thead class="thead-dark">
+		<tr>
+			<th>ФИО пациента</th>
+			<th>Вид процедур</th>
+			<th>Дата начала курса</th>
+			<th>Дата окончания курса</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var treatmentSet in Model.TreatmentSets)
+		{
+			<tr>
+				<td>@treatmentSet.Patient.PatientSurname @treatmentSet.Patient.PatientName @treatmentSet.Patient.PatientSecondName</td>
+				<td>@treatmentSet.TreatmentType.TreatmentTypeName</td>
+				<td>@treatmentSet.DateBegin.Value.ToShortDateString()</td>
+				<td>@treatmentSet.DateEnd.Value.ToShortDateString()</td>
+			</tr>
+		}
+	</tbody>
+</table>

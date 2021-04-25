@@ -1,0 +1,45 @@
+﻿@model ReportsIndexViewModel
+
+<h3>Отчёты</h3>
+<br />
+<ul class="list-group">
+	<li onclick="window.location.href='@Url.Action("RoomsScheduleReport", "Reports")'" class="list-group-item list-group-item-action">
+		Работа кабинетов
+	</li>
+	<li onclick="window.location.href='@Url.Action("PatientsReport", "Reports")'" class="list-group-item list-group-item-action">
+		Пациенты
+	</li>
+	<li class="list-group-item list-group-item-action" data-toggle="modal" data-target="#doctorModal">
+		Доктор
+	</li>
+</ul>
+
+<div class="modal fade" id="doctorModal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Выберите доктора</h5>
+				<button type="button" class="close" data-dismiss="modal">
+					<span>&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form id="doctorForm" method="get" action="/Reports/DoctorReport">
+					<div class="form-group">
+						<label>Доктор:</label>
+						<select class="custom-select" name="DoctorId">
+							@foreach (var doctor in Model.Doctors)
+							{
+								<option value="@doctor.DoctorId">@doctor.DoctorName</option>
+							}
+						</select>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+				<button type="submit" class="btn btn-primary" form="doctorForm">Сформировать отчёт</button>
+			</div>
+		</div>
+	</div>
+</div>
