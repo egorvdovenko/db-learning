@@ -16,7 +16,6 @@
 		@Model.Patient.Address
 	</dd>
 </dl>
-<br />
 <table class="table table-bordered">
 	<thead class="thead-dark">
 		<tr>
@@ -42,7 +41,6 @@
 		}
 	</tbody>
 </table>
-<br />
 <button class="btn btn-primary" onclick="window.location.href='@Url.Action("AddPatientTreatment", "Patients", new { patientId = Model.Patient.PatientId })'">
 	Добавить процедуру
 </button>
